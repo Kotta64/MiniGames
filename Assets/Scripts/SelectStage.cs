@@ -24,7 +24,7 @@ public class SelectStage : MonoBehaviourPunCallbacks
 
     void Update() {
         // ステージ選択処理
-        int stage_id = PhotonNetwork.LocalPlayer.getStageID();
+        int stage_id = PhotonNetwork.CurrentRoom.getStageID();
 
         if (Input.GetKeyDown(KeyCode.A)){
             stage_id -= 1;
@@ -33,8 +33,8 @@ public class SelectStage : MonoBehaviourPunCallbacks
             stage_id += 1;
         }
         stage_id = Mathf.Clamp(stage_id, 0, maxstage);
-        if(stage_id != PhotonNetwork.LocalPlayer.getStageID()){
-            PhotonNetwork.LocalPlayer.setStageID(stage_id);
+        if(stage_id != PhotonNetwork.CurrentRoom.getStageID()){
+            PhotonNetwork.CurrentRoom.setStageID(stage_id);
         }
     }
 
@@ -55,13 +55,13 @@ public class SelectStage : MonoBehaviourPunCallbacks
     }
 
     public override void OnCreatedRoom() {
-        PhotonNetwork.LocalPlayer.setStageID(0);
+        PhotonNetwork.CurrentRoom.setStageID(0);
     }
 
-    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps) {
-        foreach (var prop in changedProps) {
+    public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged) {
+        foreach (var prop in propertiesThatChanged) {
             if (prop.Key.Equals(StageKey)) {
-                log_text.text += "\n StageID: " + PhotonNetwork.LocalPlayer.getStageID();
+                log_text.text += "\n StageID: " + PhotonNetwork.CurrentRoom.getStageID();
             }
         }
     }
