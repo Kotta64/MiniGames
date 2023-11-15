@@ -2,12 +2,14 @@ using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SelectStage : MonoBehaviourPunCallbacks
 {
-    Text log_text;
+    private Text log_text;
+    private List<string> log_data = new List<string>();
     private const int maxstage = 5;
     private const string StageKey = "StageID";
     private bool join_flag = false;
@@ -15,8 +17,8 @@ public class SelectStage : MonoBehaviourPunCallbacks
     void Start()
     {
         // デバック用
-        GameManager.instance.player_name = "Kotta";
-        GameManager.instance.roomID = "pacapaca";
+        // GameManager.instance.player_name = "Kotta";
+        // GameManager.instance.roomID = "pacapaca";
 
         log_text = GameObject.Find("Log").GetComponent<Text>();
         PhotonNetwork.NickName = GameManager.instance.player_name;
@@ -40,21 +42,34 @@ public class SelectStage : MonoBehaviourPunCallbacks
         }
     }
 
+    private void addLog(string data) {
+        log_data.Add(data);
+
+        if(log_data.Count > 5) {
+            log_data.RemoveAt(0);
+        }
+
+        log_text.text = "";
+        foreach(string str in log_data) {
+            log_text.text += "\n" + str;
+        }
+    }
+
     public override void OnConnectedToMaster() {
         PhotonNetwork.JoinOrCreateRoom(GameManager.instance.roomID, new RoomOptions(), TypedLobby.Default);
     }
 
     public override void OnJoinedRoom() {
         join_flag = true;
-        log_text.text += String.Format("\n{0}が{1}に参加しました．", GameManager.instance.player_name, GameManager.instance.roomID);
+        addLog(String.Format("{0}が{1}に参加しました．", GameManager.instance.player_name, GameManager.instance.roomID));
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer) {
-        log_text.text += String.Format("\n{0}が{1}に参加しました．", newPlayer.NickName, GameManager.instance.roomID);
+        addLog(String.Format("{0}が{1}に参加しました．", newPlayer.NickName, GameManager.instance.roomID));
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer) {
-        log_text.text += String.Format("\n{0}が退出しました．", otherPlayer.NickName);
+        addLog(String.Format("{0}が退出しました．", otherPlayer.NickName));
     }
 
     public override void OnCreatedRoom() {
@@ -65,7 +80,7 @@ public class SelectStage : MonoBehaviourPunCallbacks
         foreach (var prop in propertiesThatChanged) {
             if (prop.Key.Equals(StageKey)) {
                 int id = PhotonNetwork.CurrentRoom.getStageID();
-                log_text.text += "\n StageID: " + id;
+                addLog("StageID: " + id);
                 GameManager.instance.stageID = id;
             }
         }
