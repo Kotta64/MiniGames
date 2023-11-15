@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     public string player_name;
     public string roomID;
+    public int stageID;
 
     private void Awake()
     {

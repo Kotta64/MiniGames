@@ -10,6 +10,7 @@ public class SelectStage : MonoBehaviourPunCallbacks
     Text log_text;
     private const int maxstage = 5;
     private const string StageKey = "StageID";
+    private bool join_flag = false;
 
     void Start()
     {
@@ -24,17 +25,18 @@ public class SelectStage : MonoBehaviourPunCallbacks
 
     void Update() {
         // ステージ選択処理
-        int stage_id = PhotonNetwork.CurrentRoom.getStageID();
-
-        if (Input.GetKeyDown(KeyCode.A)){
-            stage_id -= 1;
-        }
-        if (Input.GetKeyDown(KeyCode.D)){
-            stage_id += 1;
-        }
-        stage_id = Mathf.Clamp(stage_id, 0, maxstage);
-        if(stage_id != PhotonNetwork.CurrentRoom.getStageID()){
-            PhotonNetwork.CurrentRoom.setStageID(stage_id);
+        if (join_flag) {
+            int stage_id = PhotonNetwork.CurrentRoom.getStageID();
+            if (Input.GetKeyDown(KeyCode.A)){
+                stage_id -= 1;
+            }
+            if (Input.GetKeyDown(KeyCode.D)){
+                stage_id += 1;
+            }
+            stage_id = Mathf.Clamp(stage_id, 0, maxstage);
+            if(stage_id != PhotonNetwork.CurrentRoom.getStageID()){
+                PhotonNetwork.CurrentRoom.setStageID(stage_id);
+            }
         }
     }
 
@@ -43,6 +45,7 @@ public class SelectStage : MonoBehaviourPunCallbacks
     }
 
     public override void OnJoinedRoom() {
+        join_flag = true;
         log_text.text += String.Format("\n{0}が{1}に参加しました．", GameManager.instance.player_name, GameManager.instance.roomID);
     }
 
@@ -61,7 +64,9 @@ public class SelectStage : MonoBehaviourPunCallbacks
     public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged) {
         foreach (var prop in propertiesThatChanged) {
             if (prop.Key.Equals(StageKey)) {
-                log_text.text += "\n StageID: " + PhotonNetwork.CurrentRoom.getStageID();
+                int id = PhotonNetwork.CurrentRoom.getStageID();
+                log_text.text += "\n StageID: " + id;
+                GameManager.instance.stageID = id;
             }
         }
     }
