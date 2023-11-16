@@ -10,15 +10,13 @@ public class SelectStage : MonoBehaviourPunCallbacks
 {
     private Text log_text;
     private List<string> log_data = new List<string>();
-    private const int maxstage = 5;
     private const string StageKey = "StageID";
     private bool join_flag = false;
 
     void Start()
     {
-        // デバック用
-        // GameManager.instance.player_name = "Kotta";
-        // GameManager.instance.roomID = "pacapaca";
+        GameManager.instance.player_name = "Kotta";
+        GameManager.instance.roomID = "zen3";
 
         log_text = GameObject.Find("Log").GetComponent<Text>();
         PhotonNetwork.NickName = GameManager.instance.player_name;
@@ -35,7 +33,7 @@ public class SelectStage : MonoBehaviourPunCallbacks
             if (Input.GetKeyDown(KeyCode.D)){
                 stage_id += 1;
             }
-            stage_id = Mathf.Clamp(stage_id, 0, maxstage);
+            stage_id = Mathf.Clamp(stage_id, 0, GameManager.instance.game_count-1);
             if(stage_id != PhotonNetwork.CurrentRoom.getStageID()){
                 PhotonNetwork.CurrentRoom.setStageID(stage_id);
             }
@@ -80,7 +78,6 @@ public class SelectStage : MonoBehaviourPunCallbacks
         foreach (var prop in propertiesThatChanged) {
             if (prop.Key.Equals(StageKey)) {
                 int id = PhotonNetwork.CurrentRoom.getStageID();
-                addLog("StageID: " + id);
                 GameManager.instance.stageID = id;
             }
         }
