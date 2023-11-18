@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public string player_name;
     public string roomID;
     public int stageID;
-    public int game_count = 2;
+    public int game_count = 3;
 
     private void Awake()
     {

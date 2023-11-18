@@ -59,15 +59,15 @@ public class SelectStage : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom() {
         join_flag = true;
-        addLog(String.Format("{0}が{1}に参加しました．", GameManager.instance.player_name, GameManager.instance.roomID));
+        addLog(String.Format("{0}が{1}に参加しました", GameManager.instance.player_name, GameManager.instance.roomID));
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer) {
-        addLog(String.Format("{0}が{1}に参加しました．", newPlayer.NickName, GameManager.instance.roomID));
+        addLog(String.Format("{0}が{1}に参加しました", newPlayer.NickName, GameManager.instance.roomID));
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer) {
-        addLog(String.Format("{0}が退出しました．", otherPlayer.NickName));
+        addLog(String.Format("{0}が退出しました", otherPlayer.NickName));
     }
 
     public override void OnCreatedRoom() {
