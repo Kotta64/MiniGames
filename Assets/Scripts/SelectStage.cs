@@ -15,8 +15,8 @@ public class SelectStage : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        GameManager.instance.player_name = "Kotta";
-        GameManager.instance.roomID = "zen3";
+        // GameManager.instance.player_name = "Kotta";
+        // GameManager.instance.roomID = "zen3";
 
         log_text = GameObject.Find("Log").GetComponent<Text>();
         PhotonNetwork.NickName = GameManager.instance.player_name;
@@ -60,6 +60,7 @@ public class SelectStage : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom() {
         join_flag = true;
         addLog(String.Format("{0}が{1}に参加しました", GameManager.instance.player_name, GameManager.instance.roomID));
+        GameManager.instance.stageID = PhotonNetwork.CurrentRoom.getStageID();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer) {

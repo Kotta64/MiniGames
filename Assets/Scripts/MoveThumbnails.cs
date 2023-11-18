@@ -8,6 +8,7 @@ public class MoveThumbnails : MonoBehaviour
     private GameObject cursor;
     private const int speed = 100;
     private bool flag = true;
+
     void FixedUpdate() {
         int now = (int)this.GetComponent<RectTransform>().localPosition.x;
         int purpose = -1000*GameManager.instance.stageID;
