@@ -11,7 +11,9 @@ public class SelectStage : MonoBehaviourPunCallbacks
     private Text log_text;
     private List<string> log_data = new List<string>();
     private const string StageKey = "StageID";
+    private const string StartWindowKey = "StartWindow";
     private bool join_flag = false;
+    private GameObject window;
 
     void Start()
     {
@@ -21,6 +23,9 @@ public class SelectStage : MonoBehaviourPunCallbacks
         log_text = GameObject.Find("Log").GetComponent<Text>();
         PhotonNetwork.NickName = GameManager.instance.player_name;
         PhotonNetwork.ConnectUsingSettings();
+
+        window = GameObject.Find("StartWindow");
+        window.SetActive(false);
     }
 
     void Update() {
@@ -36,6 +41,11 @@ public class SelectStage : MonoBehaviourPunCallbacks
             stage_id = Mathf.Clamp(stage_id, 0, GameManager.instance.game_count-1);
             if(stage_id != PhotonNetwork.CurrentRoom.getStageID()){
                 PhotonNetwork.CurrentRoom.setStageID(stage_id);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Return)){
+                PhotonNetwork.CurrentRoom.setStartWindow(true);
+                window.SetActive(true);
             }
         }
     }
@@ -80,7 +90,18 @@ public class SelectStage : MonoBehaviourPunCallbacks
             if (prop.Key.Equals(StageKey)) {
                 int id = PhotonNetwork.CurrentRoom.getStageID();
                 GameManager.instance.stageID = id;
+                addLog(id.ToString());
+            }
+            if (prop.Key.Equals(StartWindowKey)) {
+                window.SetActive(PhotonNetwork.CurrentRoom.getStartWindow());
             }
         }
+    }
+
+    public void OnClick_back() {
+        PhotonNetwork.CurrentRoom.setStartWindow(false);
+    }
+    public void OnClick_start() {
+        PhotonNetwork.CurrentRoom.setStartWindow(false);
     }
 }
