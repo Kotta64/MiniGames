@@ -17,8 +17,8 @@ public class SelectStage : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        // GameManager.instance.player_name = "Kotta";
-        // GameManager.instance.roomID = "zen3";
+        GameManager.instance.player_name = "Kotta";
+        GameManager.instance.roomID = "zen3";
 
         log_text = GameObject.Find("Log").GetComponent<Text>();
         PhotonNetwork.NickName = GameManager.instance.player_name;
@@ -32,10 +32,10 @@ public class SelectStage : MonoBehaviourPunCallbacks
         // ステージ選択処理
         if (join_flag) {
             int stage_id = PhotonNetwork.CurrentRoom.getStageID();
-            if (Input.GetKeyDown(KeyCode.A)){
+            if (Input.GetKeyDown(KeyCode.A) && !(PhotonNetwork.CurrentRoom.getStartWindow())){
                 stage_id -= 1;
             }
-            if (Input.GetKeyDown(KeyCode.D)){
+            if (Input.GetKeyDown(KeyCode.D) && !(PhotonNetwork.CurrentRoom.getStartWindow())){
                 stage_id += 1;
             }
             stage_id = Mathf.Clamp(stage_id, 0, GameManager.instance.game_count-1);
