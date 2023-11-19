@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SelectStage : MonoBehaviourPunCallbacks
 {
@@ -12,6 +13,7 @@ public class SelectStage : MonoBehaviourPunCallbacks
     private List<string> log_data = new List<string>();
     private const string StageKey = "StageID";
     private const string StartWindowKey = "StartWindow";
+    private const string StartFlagKey = "StartFlag";
     private bool join_flag = false;
     private GameObject window;
 
@@ -42,8 +44,7 @@ public class SelectStage : MonoBehaviourPunCallbacks
             if(stage_id != PhotonNetwork.CurrentRoom.getStageID()){
                 PhotonNetwork.CurrentRoom.setStageID(stage_id);
             }
-
-            if (Input.GetKeyDown(KeyCode.Return)){
+            if (Input.GetKeyDown(KeyCode.Return) && PhotonNetwork.PlayerList.Length >= 2){
                 PhotonNetwork.CurrentRoom.setStartWindow(true);
                 window.SetActive(true);
             }
@@ -64,7 +65,7 @@ public class SelectStage : MonoBehaviourPunCallbacks
     }
 
     public override void OnConnectedToMaster() {
-        PhotonNetwork.JoinOrCreateRoom(GameManager.instance.roomID, new RoomOptions(), TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom(GameManager.instance.roomID, new RoomOptions(){MaxPlayers = 2}, TypedLobby.Default);
     }
 
     public override void OnJoinedRoom() {
@@ -94,6 +95,9 @@ public class SelectStage : MonoBehaviourPunCallbacks
             }
             if (prop.Key.Equals(StartWindowKey)) {
                 window.SetActive(PhotonNetwork.CurrentRoom.getStartWindow());
+            }
+            if (prop.Key.Equals(StartFlagKey)) {
+                SceneManager.LoadScene(String.Format("Game{0}Scene", GameManager.instance.stageID.ToString()));
             }
         }
     }
