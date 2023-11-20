@@ -1244,6 +1244,7 @@ GameObject:
   - component: {fileID: 917809495}
   - component: {fileID: 917809494}
   - component: {fileID: 917809497}
+  - component: {fileID: 917809498}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -1378,6 +1379,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba89e559d9e714b80bedae8c49d5f36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &917809498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917809492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 3
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &938607082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1821,6 +1844,7 @@ GameObject:
   - component: {fileID: 1687704936}
   - component: {fileID: 1687704935}
   - component: {fileID: 1687704938}
+  - component: {fileID: 1687704939}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -1955,6 +1979,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba89e559d9e714b80bedae8c49d5f36f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1687704939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1687704933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1729947308
 GameObject:
   m_ObjectHideFlags: 0
@@ -1965,6 +2011,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1729947309}
   - component: {fileID: 1729947310}
+  - component: {fileID: 1729947311}
   m_Layer: 0
   m_Name: SelectStage
   m_TagString: Untagged
@@ -1999,6 +2046,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afa823a15eabe44d0ae4ae126c1858c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1729947311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729947308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1837302499
 GameObject:
   m_ObjectHideFlags: 0

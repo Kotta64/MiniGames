@@ -40,6 +40,8 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - go2select
+  - setStartWindow
+  - go2gamescene
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

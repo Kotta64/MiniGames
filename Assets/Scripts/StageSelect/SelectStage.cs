@@ -23,10 +23,10 @@ public class SelectStage : MonoBehaviourPunCallbacks
 
     void Update() {
         int stage_id = PhotonNetwork.CurrentRoom.getStageID();
-        if (Input.GetKeyDown(KeyCode.A) && !(PhotonNetwork.CurrentRoom.getStartWindow())){
+        if (Input.GetKeyDown(KeyCode.A) && !(window.activeSelf)){
             stage_id -= 1;
         }
-        if (Input.GetKeyDown(KeyCode.D) && !(PhotonNetwork.CurrentRoom.getStartWindow())){
+        if (Input.GetKeyDown(KeyCode.D) && !(window.activeSelf)){
             stage_id += 1;
         }
         stage_id = Mathf.Clamp(stage_id, 0, GameManager.instance.game_count-1);
@@ -34,19 +34,16 @@ public class SelectStage : MonoBehaviourPunCallbacks
             PhotonNetwork.CurrentRoom.setStageID(stage_id);
         }
         if (Input.GetKeyDown(KeyCode.Return) && leftroom.activeSelf){
-            PhotonNetwork.CurrentRoom.setStartFlag(0);
-            PhotonNetwork.CurrentRoom.setStartWindow(false);
             SceneManager.LoadScene("TitleScene");
         }
         if (Input.GetKeyDown(KeyCode.Return) && window.activeSelf){
-            PhotonNetwork.CurrentRoom.setStartWindow(false);
-            PhotonNetwork.CurrentRoom.setStartFlag(2);
+            photonView.RPC("go2gamescene", RpcTarget.All);
         }
         if (Input.GetKeyDown(KeyCode.Escape) && window.activeSelf){
-            PhotonNetwork.CurrentRoom.setStartWindow(false);
+            photonView.RPC("setStartWindow", RpcTarget.All, false);
         }
         if (Input.GetKeyDown(KeyCode.Return) && PhotonNetwork.PlayerList.Length >= 2 && !(window.activeSelf)){
-            PhotonNetwork.CurrentRoom.setStartWindow(true);
+            photonView.RPC("setStartWindow", RpcTarget.All, true);
         }
     }
 
@@ -56,16 +53,20 @@ public class SelectStage : MonoBehaviourPunCallbacks
                 int id = PhotonNetwork.CurrentRoom.getStageID();
                 GameManager.instance.stageID = id;
             }
-            if (prop.Key.Equals(StartWindowKey)) {
-                window.SetActive(PhotonNetwork.CurrentRoom.getStartWindow());
-            }
-            if (prop.Key.Equals(StartFlagKey) && PhotonNetwork.CurrentRoom.getStartFlag() == 2) {
-                SceneManager.LoadScene(String.Format("Game{0}Scene", GameManager.instance.stageID.ToString()));
-            }
         }
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer) {
         leftroom.SetActive(true);
+    }
+
+    [PunRPC]
+    private void setStartWindow(bool state) {
+        window.SetActive(state);
+    }
+
+    [PunRPC]
+    private void go2gamescene() {
+        SceneManager.LoadScene(String.Format("Game{0}Scene", GameManager.instance.stageID.ToString()));
     }
 }

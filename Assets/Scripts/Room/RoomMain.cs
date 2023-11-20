@@ -1,6 +1,5 @@
 using Photon.Pun;
 using Photon.Realtime;
-using ExitGames.Client.Photon;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,9 +15,6 @@ public class RoomMain : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        //GameManager.instance.player_name = "Kotta";
-        //GameManager.instance.roomID = "zen3";
-
         log_text = GameObject.Find("LogText").GetComponent<Text>();
         PhotonNetwork.NickName = GameManager.instance.player_name;
         PhotonNetwork.ConnectUsingSettings();
