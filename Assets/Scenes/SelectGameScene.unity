@@ -1317,8 +1317,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 917809497}
-        m_TargetAssemblyTypeName: StartWindow, Assembly-CSharp
+      - m_Target: {fileID: 1729947310}
+        m_TargetAssemblyTypeName: SelectStage, Assembly-CSharp
         m_MethodName: OnClick_back
         m_Mode: 1
         m_Arguments:
@@ -1917,8 +1917,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1687704938}
-        m_TargetAssemblyTypeName: StartWindow, Assembly-CSharp
+      - m_Target: {fileID: 1729947310}
+        m_TargetAssemblyTypeName: SelectStage, Assembly-CSharp
         m_MethodName: OnClick_start
         m_Mode: 1
         m_Arguments:

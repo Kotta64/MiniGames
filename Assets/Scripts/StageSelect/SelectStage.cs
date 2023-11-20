@@ -69,4 +69,11 @@ public class SelectStage : MonoBehaviourPunCallbacks
     private void go2gamescene() {
         SceneManager.LoadScene(String.Format("Game{0}Scene", GameManager.instance.stageID.ToString()));
     }
+
+    public void OnClick_back() {
+        photonView.RPC("setStartWindow", RpcTarget.All, false);
+    }
+    public void OnClick_start() {
+        photonView.RPC("go2gamescene", RpcTarget.All);
+    }
 }
