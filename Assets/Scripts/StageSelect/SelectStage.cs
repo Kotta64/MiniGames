@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using ExitGames.Client.Photon;
 using System;
 using UnityEngine;
@@ -7,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class SelectStage : MonoBehaviourPunCallbacks
 {
     private GameObject window;
+    private GameObject leftroom;
     private const string StageKey = "StageID";
     private const string StartWindowKey = "StartWindow";
     private const string StartFlagKey = "StartFlag";
@@ -15,6 +17,8 @@ public class SelectStage : MonoBehaviourPunCallbacks
     {
         window = GameObject.Find("StartWindow");
         window.SetActive(false);
+        leftroom = GameObject.Find("LeftRoom");
+        leftroom.SetActive(false);
     }
 
     void Update() {
@@ -28,6 +32,11 @@ public class SelectStage : MonoBehaviourPunCallbacks
         stage_id = Mathf.Clamp(stage_id, 0, GameManager.instance.game_count-1);
         if(stage_id != PhotonNetwork.CurrentRoom.getStageID()){
             PhotonNetwork.CurrentRoom.setStageID(stage_id);
+        }
+        if (Input.GetKeyDown(KeyCode.Return) && leftroom.activeSelf){
+            PhotonNetwork.CurrentRoom.setStartFlag(0);
+            PhotonNetwork.CurrentRoom.setStartWindow(false);
+            SceneManager.LoadScene("TitleScene");
         }
         if (Input.GetKeyDown(KeyCode.Return) && window.activeSelf){
             PhotonNetwork.CurrentRoom.setStartWindow(false);
@@ -54,5 +63,9 @@ public class SelectStage : MonoBehaviourPunCallbacks
                 SceneManager.LoadScene(String.Format("Game{0}Scene", GameManager.instance.stageID.ToString()));
             }
         }
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer) {
+        leftroom.SetActive(true);
     }
 }

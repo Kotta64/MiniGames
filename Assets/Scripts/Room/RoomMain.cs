@@ -81,18 +81,15 @@ public class RoomMain : MonoBehaviourPunCallbacks
 
     public void OnClick() {
         if (PhotonNetwork.PlayerList.Length > 1) {
-            PhotonNetwork.CurrentRoom.setStartFlag(1);
+            photonView.RPC(nameof(go2select), RpcTarget.All);
         }else{
             addLog("プレイヤー人数が足りません");
         }
     } 
 
-    public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged) {
-        foreach (var prop in propertiesThatChanged) {
-            if (prop.Key.Equals(StartFlagKey) && PhotonNetwork.CurrentRoom.getStartFlag() == 1) {
-                SceneManager.LoadScene("SelectGameScene");
-            }
-        }
+    [PunRPC]
+    private void go2select(){
+        SceneManager.LoadScene("SelectGameScene");
     }
 }
 
