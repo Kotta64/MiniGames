@@ -23,7 +23,7 @@ public class RoomIDButton : MonoBehaviour
         
         if (id.Length > 0) {
             GameManager.instance.roomID = id;
-            SceneManager.LoadScene("SelectGameScene");
+            SceneManager.LoadScene("RoomScene");
         }
     }
 }
