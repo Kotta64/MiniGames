@@ -9,6 +9,7 @@ public class RoomIDButton : MonoBehaviour
     void Start()
     {
         roomIDInput = GameObject.Find("RoomIDInput").GetComponent<InputField>();
+        roomIDInput.ActivateInputField();
     }
 
     // Update is called once per frame

@@ -9,6 +9,7 @@ public class StartButton : MonoBehaviour
     void Start()
     {
         nameInput = GameObject.Find("PlayerNameInput").GetComponent<InputField>();
+        nameInput.ActivateInputField();
         RoomIDWindow = GameObject.Find("RoomIDWindow");
         RoomIDWindow.SetActive(false);
     }
