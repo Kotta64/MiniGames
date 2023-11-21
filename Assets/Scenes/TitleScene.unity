@@ -1181,7 +1181,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 315c3dc1dbd224c518c27237384e4236, type: 3}
+    m_Font: {fileID: 12800000, guid: 7896424abe3394f37a277758abb054e8, type: 3}
     m_FontSize: 128
     m_FontStyle: 0
     m_BestFit: 0
@@ -1193,7 +1193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\u30DF\u30CB\u30B2\u30FC\u30E0"
+  m_Text: "\u30DF\u30CB\u30B2\u30FC\u30E0\u96C6"
 --- !u!222 &1533868409
 CanvasRenderer:
   m_ObjectHideFlags: 0

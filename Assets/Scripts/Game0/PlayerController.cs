@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviourPunCallbacks
 {
-    private const float power = 100.0f;
+    private const float move_power = 100.0f;
     Rigidbody rb;
     // Start is called before the first frame update
     void Start()
@@ -16,16 +16,16 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
         if(photonView.IsMine) {
             if(Input.GetKey(KeyCode.W)){
-                rb.AddForce(transform.forward * power);
+                rb.AddForce(transform.forward * move_power);
             }
             if(Input.GetKey(KeyCode.S)){
-                rb.AddForce(-transform.forward * power);
+                rb.AddForce(-transform.forward * move_power);
             }
             if(Input.GetKey(KeyCode.A)){
-                rb.AddForce(-transform.right * power);
+                rb.AddForce(-transform.right * move_power);
             }
             if(Input.GetKey(KeyCode.D)){
-                rb.AddForce(transform.right * power);
+                rb.AddForce(transform.right * move_power);
             }
         }
     }

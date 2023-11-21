@@ -25,7 +25,7 @@ public class StartButton : MonoBehaviour
     public void OnClick() {
         string name = nameInput.text;
         
-        if (name.Length > 0) {
+        if (name.Length > 0 && name.Length < 15) {
             GameManager.instance.player_name = name;
             RoomIDWindow.SetActive(true);
         }
