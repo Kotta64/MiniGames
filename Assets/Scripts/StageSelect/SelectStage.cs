@@ -57,6 +57,7 @@ public class SelectStage : MonoBehaviourPunCallbacks
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer) {
+        PhotonNetwork.LeaveRoom();
         leftroom.SetActive(true);
     }
 

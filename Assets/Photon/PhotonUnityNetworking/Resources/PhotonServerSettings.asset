@@ -43,6 +43,10 @@ MonoBehaviour:
   - setStartWindow
   - go2gamescene
   - setBall
+  - controllBall
+  - getpV
+  - test
+  - tets
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
