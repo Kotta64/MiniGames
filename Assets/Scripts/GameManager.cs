@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
-    
+    public string player_name;
+    public string roomID;
+    public int stageID;
+    public int game_count = 3;
+
     private void Awake()
     {
         if (instance == null)
