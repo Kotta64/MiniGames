@@ -73,3 +73,6 @@ crashlytics-build.properties
 
 # 追加分
 .DS_Store
+.DS_Store?
+.vscode
+.vsconfig
