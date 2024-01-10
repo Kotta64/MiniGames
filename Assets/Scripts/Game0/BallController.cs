@@ -8,6 +8,7 @@ public class BallController : MonoBehaviourPunCallbacks
     private const float throw_power = 15f;
     private const float move_power = 100;
     private Rigidbody rb;
+    private int[] reverse = {2, 1};
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
@@ -18,6 +19,7 @@ public class BallController : MonoBehaviourPunCallbacks
 
     private void OnCollisionEnter(Collision collision)
     {
+        var turn = PhotonNetwork.CurrentRoom.getTurn();
         if(photonView.IsMine){
             if(collision.gameObject.name=="Player1(Clone)"){
                 rb.velocity = new Vector3(0, 1f, -1f)*throw_power;
@@ -25,9 +27,10 @@ public class BallController : MonoBehaviourPunCallbacks
             }else if(collision.gameObject.name=="Player2(Clone)"){
                 rb.velocity = new Vector3(0, 1f, 1f)*throw_power;
                 PhotonNetwork.CurrentRoom.setTurn(2);
-            }else if(collision.gameObject.name=="Field" && PhotonNetwork.CurrentRoom.getTurn() != 0){
+            }else if(collision.gameObject.name=="Field" && turn != 0){
                 PhotonNetwork.CurrentRoom.setTurn(0);
-                setBall(1);
+                Game0.instance.next(turn);
+                setBall(reverse[turn-1]);
             }
         }
     }
